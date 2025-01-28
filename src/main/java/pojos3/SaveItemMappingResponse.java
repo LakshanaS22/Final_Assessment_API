@@ -1,6 +1,7 @@
 package pojos3;
 
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class SaveItemMappingResponse {
     private String requestId;
@@ -38,5 +39,7 @@ public class SaveItemMappingResponse {
                 ", value=" + value +
                 '}';
     }
+
+
 }
 
