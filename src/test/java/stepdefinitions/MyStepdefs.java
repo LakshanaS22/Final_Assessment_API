@@ -307,13 +307,6 @@ public class MyStepdefs {
         Assert.assertNotNull("SKU Code should not be null", skuCode);
         Assert.assertFalse("SKU Code should not be empty", skuCode.isEmpty());
         Properties properties = new Properties();
-        try (FileOutputStream output = new FileOutputStream("config.properties", true)) {
-            properties.load(new FileInputStream("config.properties"));
-            properties.setProperty("skuCode", skuCode);
-            properties.store(output, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Then("validate the response and the fetched SKU Code")
