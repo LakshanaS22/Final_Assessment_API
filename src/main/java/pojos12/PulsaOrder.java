@@ -44,7 +44,7 @@ public class PulsaOrder{
 	private int totalOrder;
 	private int totalAdjustmentPoints;
 	private CommonInquiryInfo commonInquiryInfo;
-	private long orderDate;
+	private String orderDate;
 	private boolean resendOrderRequested;
 	private Customer customer;
 	private String status;
@@ -377,11 +377,11 @@ public class PulsaOrder{
 		return commonInquiryInfo;
 	}
 
-	public void setOrderDate(long orderDate){
+	public void setOrderDate(String orderDate){
 		this.orderDate = orderDate;
 	}
 
-	public long getOrderDate(){
+	public String getOrderDate(){
 		return orderDate;
 	}
 

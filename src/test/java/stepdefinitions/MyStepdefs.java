@@ -18,6 +18,7 @@ import pojos10.ApproveOrderRequest;
 import pojos10.ApproveOrderResponse;
 import pojos11.Approve;
 import pojos12.*;
+import pojos13.Response2;
 import pojos2.TEST.ResponseTest;
 import pojos2.Value;
 import pojos2.Responses;
@@ -67,11 +68,9 @@ public class MyStepdefs {
     }
 
     private static final Map<String, Object> scenarioData = new HashMap<>();
-
     public static void put(String key, Object value) {
         scenarioData.put(key, value);
     }
-
     public static Object get(String key) {
         return scenarioData.get(key);
     }
@@ -494,7 +493,7 @@ public class MyStepdefs {
         requestBody.setOrderId(orderId);
         requestBody.setExtData(new HashMap<>());
         requestBody.setSubscriptionToken("string");
-        requestBody.setSubscriptionTokenExpiryDate("2025-01-28T12:42:00.264Z");
+        requestBody.setSubscriptionTokenExpiryDate("2025-01-29T12:42:00.264Z");
         Response response = given()
                 .baseUri("http://x-pulsa.qa2-sg.cld/x-pulsa")
                 .accept("application/json")
@@ -508,26 +507,29 @@ public class MyStepdefs {
                 .when()
                 .post("/api/approveOrder/approveOrderPayment");
 
-        put("approveOrderResponse", response);
-
+        Response2 response2 = response.as(Response2.class);
+        put("response2", response2);
         System.out.println("Response: " + response.getBody().asString());
+
     }
 
     @Then("the response status should be {string} and the order should be approved")
     public void theResponseStatusShouldBeAndTheOrderShouldBeApproved(String expectedStatus) {
-        Response response = (Response) get("approveOrderResponse");
-        int actualStatusCode = response.getStatusCode();
-        Assert.assertEquals("Expected status code to be 200", 200, actualStatusCode);
-        System.out.println("Response Status Code: " + actualStatusCode);
+        Response2 response2 = (Response2) get("response2");
+//        int actualStatusCode = response2.getStatusCode();
+//        Assert.assertEquals("Expected status code to be 200", 200, actualStatusCode);
+//        System.out.println("Response Status Code: " + actualStatusCode);
+//
+//        String actualStatus = response.jsonPath().getString("true");
+//        Assert.assertEquals("Expected success status", expectedStatus, actualStatus);
+//
+//        String errorMessage = response.jsonPath().getString("errorMessage");
+//        String errorCode = response.jsonPath().getString("errorCode");
 
-        String actualStatus = response.jsonPath().getString("true");
-        Assert.assertEquals("Expected success status", expectedStatus, actualStatus);
+//        System.out.println("Error Message: " + errorMessage);
+//        System.out.println("Error Code: " + errorCode);
+        Assert.assertTrue("Response was not successful", response2.isSuccess());
 
-        String errorMessage = response.jsonPath().getString("errorMessage");
-        String errorCode = response.jsonPath().getString("errorCode");
-
-        System.out.println("Error Message: " + errorMessage);
-        System.out.println("Error Code: " + errorCode);
     }
 
     //API 12

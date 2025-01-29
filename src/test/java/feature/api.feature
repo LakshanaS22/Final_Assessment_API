@@ -41,9 +41,10 @@ Feature: Digital Catalog API and X-Pulsa Integration
     When the Pay Order API is called with pulsaCartId
     Then the responsens code should be valid and the payment should be processed
 
-    #API 11
+#    #API 11
     When the Approve Order API is called with the orderId
-    #Then the response status should be "success" and the order should be approved
+    Then the response status should be "success" and the order should be approved
 
+    #API 12
     When the Get Pulsa Order by OrderId API is called with the orderId
     Then the response should validate the order transaction successfully
